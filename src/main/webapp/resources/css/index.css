@@ -1,0 +1,53 @@
+.Topo {
+	width: 100%;
+	height: 100px;
+}
+
+.Titulo {
+	color: #253C89;
+	margin-left: 40px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.Add {
+	width: 20px;
+	height: 20px;
+	margin-left: 10px;
+}
+
+.Texto {
+	margin-left: 40px;
+}
+
+.Botao {
+	margin-left: 10px;
+	font-size: 14px;
+	border: none;
+	background-color: #253C89;
+	color: #FFFFFF;
+	cursor: pointer;
+	padding: 5px;
+	border-radius: 4px;
+	width: 100px;
+}
+
+.Botao:hover {
+	transition: 0.3s;
+	background-color: #DDDDDD;
+	color: #FFFFFF;
+}
+
+.listaDicionarios {
+	margin-left: 40px;
+	border: #FFFFFF solid 40px;
+	width: 400px;
+}
+
+.txtModal {
+	margin-bottom: 20px;
+}
+
+.panelModal {
+	text-align: center;
+}
