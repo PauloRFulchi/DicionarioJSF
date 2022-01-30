@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+		<title>Palavras Dicionário</title>
+		<h:outputStylesheet library="css" name="reset.css" />
+		<h:outputStylesheet library="css" name="palavras.css" />
+	
+	
+	</h:head>
+
+	<h:body>
+		<h:graphicImage value="/resources/images/toppalavras.png" styleClass="Topo"></h:graphicImage>
+		<br />
+		<br />
+	
+	
+		<h:outputLabel value="#{campospalavras.nomeDicionario}" styleClass="Titulo"></h:outputLabel>
+		<h:graphicImage value="/resources/images/abcpalavras.png" styleClass="Add" onclick="PF('dlg1').show();"></h:graphicImage>
+		<h:graphicImage value="/resources/images/userpalavras.png" styleClass="Add"></h:graphicImage>
+		<h:graphicImage value="/resources/images/gearpalavras.png" styleClass="Add"></h:graphicImage>
+		<br />
+		<br />
+	
+	
+		<h:graphicImage value="/resources/images/underline.png" styleClass="under"></h:graphicImage>
+		<h:graphicImage value="/resources/images/indice.png" styleClass="incice"></h:graphicImage>
+		<br />
+		<br />
+		<br />
+		<br />
+	
+		<h:dataTable value="#{dtpalavras.palavrasLista}" var="p">
+			<h:column>
+				<h:outputText style="color: white" value="---" />
+			</h:column>
+	
+			<h:column>
+				<h:outputText style="color: white" value="#{p.codigotexto}" />
+			</h:column>
+	
+			<h:column>
+				<h:outputText style="font-weight: bold" value="#{p.texto}" />
+				<br />
+				<br />
+				<h:outputText value="#{p.definicao}" />
+				<br />
+				<br />
+				<h:graphicImage value="/resources/images/underline.png" styleClass="under"></h:graphicImage>
+			</h:column>
+	
+			<h:column>
+				<h:commandButton value="ver mais" type="button" onclick="PF('dlg2').show(); #{modalextra.execute(p.texto, p.definicaoextra)}"
+					styleClass="txtButton" />
+			</h:column>
+	
+		</h:dataTable>
+		<br />
+		<br />
+	
+	
+		<p:dialog header="Adicionar Palavra" widgetVar="dlg1" modal="true" height="250" width="600">
+	
+			<h:form>
+				<h:outputLabel value="Palavra" styleClass="Titulo"></h:outputLabel>
+				<h:inputText value="#{campospalavras.texto}" styleClass="txtModal"></h:inputText>
+				<br />
+				<br />
+				<h:outputLabel value="Definição curta" styleClass="Titulo"></h:outputLabel>
+				<h:inputTextarea value="#{campospalavras.definicao}" styleClass="txtModal"></h:inputTextarea>
+				<br />
+				<br />
+				<h:outputLabel value="Definição extra" styleClass="Titulo"></h:outputLabel>
+				<h:inputTextarea value="#{campospalavras.definicaoextra}" styleClass="txtModal"></h:inputTextarea>
+	
+				<br />
+				<br />
+				<h:commandButton value="Salvar" action="#{salvarpalavras.execute()}" styleClass="Botao">
+					<f:actionListener binding="#{salvarpalavras.salvar('Salvar')}" />
+				</h:commandButton>
+	
+				<h:commandButton value="Fechar" action="PF('dlg1').hide();" styleClass="Botao">
+					<f:actionListener binding="#{salvarpalavras.salvar('Fechar')}" />
+				</h:commandButton>
+			</h:form>
+	
+		</p:dialog>
+	
+	
+		<p:dialog header="#{modalextra.texto}" widgetVar="dlg2" modal="true"
+			height="500" width="900">
+			<p:panel styleClass="Panel">
+				<h:outputLabel value="#{modalextra.definicaoextra}"></h:outputLabel>
+			</p:panel>
+	
+			<h:commandButton value="Fechar" type="button" onclick="PF('dlg2').hide();" styleClass="Botao" />
+		</p:dialog>
+	
+	</h:body>
+</html>

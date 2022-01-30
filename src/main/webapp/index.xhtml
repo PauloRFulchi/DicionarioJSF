@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+		<title>Home</title>
+		<h:outputStylesheet library="css" name="reset.css" />
+		<h:outputStylesheet library="css" name="index.css" />
+	
+	
+		<script type="text/javascript">
+			function excluir(nome) {
+				let confirmAction = confirm("Deseja excluir " + nome + "?");
+	
+				if (confirmAction) {
+					alert("Dicionário " + nome + " excluido com sucesso!");
+				}
+			}
+		</script>
+	
+	</h:head>
+
+<h:body>
+
+	<h:graphicImage value="/resources/images/top.png" styleClass="Topo"></h:graphicImage>
+	<br />
+	<br />
+
+	<h:outputLabel value="Dicionário" styleClass="Titulo"></h:outputLabel>
+	<h:graphicImage value="/resources/images/plus.png" styleClass="Add" onclick="PF('dlg2').show();"></h:graphicImage>
+	<br />
+	<br />
+
+
+	<h:dataTable value="#{dtdicionario.dicionarioLista}" var="p">
+
+		<h:column>
+			<h:outputText style="color: white" value="---" />
+		</h:column>
+
+		<h:column>
+			<h:outputText style="color: white" value="#{p.codigo}" />
+		</h:column>
+
+		<h:column>
+			<h:outputText value="#{p.nome}" />
+		</h:column>
+
+		<h:column>
+			<td><h:graphicImage value="/resources/images/lupa.png" styleClass="Add"></h:graphicImage></td>
+		</h:column>
+
+		<h:column>
+			<td><h:graphicImage value="/resources/images/user.png" styleClass="Add"></h:graphicImage></td>
+		</h:column>
+
+		<h:column>
+			<h:form>
+				<h:commandLink value="#{campospalavras.codDicionario}" action="#{pagina.navegar(p.codigo, p.nome, 'palavras.xhtml')}"
+					styleClass="Titulo">ABC</h:commandLink>
+			</h:form>
+		</h:column>
+
+		<h:column>
+			<td><h:graphicImage value="/resources/images/gear.png" styleClass="Add"></h:graphicImage></td>
+		</h:column>
+
+		<h:column>
+			<td><h:graphicImage value="/resources/images/close.png" styleClass="Add" onclick="excluir('#{p.nome}');"></h:graphicImage></td>
+		</h:column>
+
+	</h:dataTable>
+	<br />
+	<br />
+
+
+	<p:dialog header="Adicionar Dicionário" widgetVar="dlg2" modal="true" height="300" width="450">
+
+		<h:form id="myForm">
+			<h:outputLabel value="Nome" styleClass="Titulo"></h:outputLabel>
+			<h:inputText id="txtNome" value="#{camposdicionario.nome}"></h:inputText>
+			<br />
+			<br />
+			<h:outputLabel value="Cor Botao" styleClass="Titulo"></h:outputLabel>
+			<h:inputText id="txtCorBotao" value="#{camposdicionario.corBotao}"></h:inputText>
+			<br />
+			<br />
+			<h:outputLabel value="Cor Botao Fonte" styleClass="Titulo"></h:outputLabel>
+			<h:inputText id="txtCorBotaoFonte" value="#{camposdicionario.corbotaoFonte}"></h:inputText>
+			<br />
+			<br />
+			<h:outputLabel value="Cor Titulo" styleClass="Titulo"></h:outputLabel>
+			<h:inputText id="txtCorTitulo" value="#{camposdicionario.corTitulo}"></h:inputText>
+			<br />
+			<br />
+			<h:outputLabel value="Cor Icone" styleClass="Titulo"></h:outputLabel>
+			<h:inputText id="txtCorIcone" value="#{camposdicionario.corIcone}"></h:inputText>
+			<br />
+			<br />
+			<h:commandButton value="Salvar" action="#{myBean.execute()}" styleClass="Botao">
+				<f:actionListener binding="#{myBean.salvar('Salvar')}" />
+			</h:commandButton>
+
+			<h:commandButton value="Fechar" action="PF('dlg2').hide();" styleClass="Botao">
+				<f:actionListener binding="#{myBean.salvar('Fechar')}" />
+			</h:commandButton>
+		</h:form>
+
+	</p:dialog>
+
+</h:body>
+</html>
